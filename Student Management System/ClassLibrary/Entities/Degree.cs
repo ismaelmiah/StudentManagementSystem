@@ -1,4 +1,4 @@
-﻿namespace Student_Management_System
+﻿namespace ClassLibrary.Entities
 {
     public enum Degree
     {

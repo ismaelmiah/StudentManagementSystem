@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Principal;
 
-namespace Student_Management_System
+namespace ClassLibrary.Entities
 {
     public class Student
     {
@@ -10,10 +9,17 @@ namespace Student_Management_System
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string StudentId { get; set; }
-        public DateTime JoiningBatch { get; set; }
+        public string JoiningBatch { get; set; }
         public Department Department { get; set; }
         public Degree Degree { get; set; }
         public Semester SemesterAttend { get; set; }
         public List<Course> Courses { get; set; }
+        //First Name 
+        //● Middle Name 
+        //● Last Name 
+        //● Student ID 
+        //● Joining Batch - pre-populated based on the current date.
+        //● Department
+        //● Degree
     }
 }

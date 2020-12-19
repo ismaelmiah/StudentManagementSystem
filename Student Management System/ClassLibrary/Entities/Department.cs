@@ -1,8 +1,8 @@
-﻿namespace Student_Management_System
+﻿namespace ClassLibrary.Entities
 {
     public enum Department
     {
-        ComputerScience = 1,
+        ComputerScience,
         BBA,
         English
     }
