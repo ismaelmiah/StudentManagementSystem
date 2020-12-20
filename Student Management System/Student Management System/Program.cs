@@ -1,6 +1,4 @@
-﻿using System;
-using Autofac;
-using ClassLibrary.Services;
+﻿using Autofac;
 
 namespace Student_Management_System
 {

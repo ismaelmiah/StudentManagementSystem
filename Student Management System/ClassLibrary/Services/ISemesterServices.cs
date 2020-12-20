@@ -4,6 +4,6 @@ namespace ClassLibrary.Services
 {
     public interface ISemesterServices
     {
-        void AddSemester(Semester semester);
+        void AddSemester(string id, Semester semester);
     }
 }

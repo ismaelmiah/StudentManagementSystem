@@ -13,7 +13,6 @@ namespace ClassLibrary.Entities
         public Department Department { get; set; }
         public Degree Degree { get; set; }
         public Semester SemesterAttend { get; set; }
-        public List<Course> Courses { get; set; }
         //First Name 
         //● Middle Name 
         //● Last Name 

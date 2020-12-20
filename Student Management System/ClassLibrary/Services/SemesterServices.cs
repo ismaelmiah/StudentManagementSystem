@@ -10,9 +10,9 @@ namespace ClassLibrary.Services
         {
             _dataAccess = dataAccess;
         }
-        public void AddSemester(Semester semester)
+        public void AddSemester(string id, Semester semester)
         {
-            //_dataAccess.SaveData(semester);
+            _dataAccess.SaveData(id, semester);
         }
     }
 }

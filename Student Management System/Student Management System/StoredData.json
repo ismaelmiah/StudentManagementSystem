@@ -9,7 +9,8 @@
     "Degree": 6,
     "SemesterAttend": {
       "SemesterCode": null,
-      "Year": null
+      "Year": null,
+      "Courses": null
     },
     "Courses": []
   },
@@ -22,8 +23,16 @@
     "Department": 0,
     "Degree": 1,
     "SemesterAttend": {
-      "SemesterCode": null,
-      "Year": null
+      "SemesterCode": "SUM",
+      "Year": "2020",
+      "Courses": [
+        {
+          "CourseId": "CSC 301",
+          "CourseName": "System Analysis & Design",
+          "InstructorName": "Robel Khan",
+          "NumberOfCredits": 4
+        }
+      ]
     },
     "Courses": []
   }
