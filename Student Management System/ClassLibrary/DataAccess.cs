@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using Autofac;
@@ -92,12 +91,16 @@ namespace ClassLibrary
                 if (student != null)
                 {
                     Console.WriteLine($"\nFull Name: {student.FirstName}\nMiddle Name: {student.MiddleName}\nLast Name: {student.LastName}\nStudent ID: {student.StudentId}\nJoining Batch: {student.JoiningBatch}\nDepartment: {student.Department}\nDegree: {student.Degree}\nSemester: {student.SemesterAttend.SemCodeResult(student.SemesterAttend.SemesterCode)}\nCourses: \n");
-                    foreach (var course in student.SemesterAttend.Courses)
+                    if (student.SemesterAttend.Courses != null)
                     {
-                        Console.WriteLine($"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
-                    }
 
-                    Console.WriteLine("\n");
+                        foreach (var course in student.SemesterAttend.Courses)
+                        {
+                            Console.WriteLine($"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
+                        }
+
+                        Console.WriteLine("\n");
+                    }
                 }
                 else
                 {
@@ -128,7 +131,29 @@ namespace ClassLibrary
 
         public void LoadAllData()
         {
-            throw new NotImplementedException();
+            using (var r = new StreamReader(Path))
+            {
+                var json = r.ReadToEnd();
+                var students = JsonConvert.DeserializeObject<List<Student>>(json);
+                if (students != null)
+                {
+                    foreach (var student in students)
+                    {
+                        Console.WriteLine($"\nName: {student.FirstName}\tStudent ID: {student.StudentId}");
+                        if (student.SemesterAttend.Courses == null || (student.SemesterAttend.Courses!=null && student.SemesterAttend.Courses.Count == 0)) continue;
+                        Console.WriteLine("Courses: ");
+                        foreach (var course in student.SemesterAttend.Courses)
+                        {
+                            Console.WriteLine($"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
+                        }
+                    }
+                    Console.WriteLine("\n");
+                }
+                else
+                {
+                    Console.WriteLine("No Student Added");
+                }
+            }
         }
     }
 }

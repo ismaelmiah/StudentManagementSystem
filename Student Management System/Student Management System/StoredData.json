@@ -1,9 +1,9 @@
 [
   {
-    "FirstName": "Rana",
+    "FirstName": "Rasel",
     "MiddleName": "",
-    "LastName": "Rocky",
-    "StudentId": "567890",
+    "LastName": "Roni",
+    "StudentId": "567803",
     "JoiningBatch": "Fall 2020",
     "Department": 1,
     "Degree": 6,
@@ -11,8 +11,35 @@
       "SemesterCode": null,
       "Year": null,
       "Courses": null
-    },
-    "Courses": []
+    }
+  },
+  {
+    "FirstName": "Rahim",
+    "MiddleName": "mowla",
+    "LastName": "Rashid",
+    "StudentId": "145500",
+    "JoiningBatch": "Fall 2020",
+    "Department": 1,
+    "Degree": 3,
+    "SemesterAttend": {
+      "SemesterCode": null,
+      "Year": null,
+      "Courses": null
+    }
+  },
+  {
+    "FirstName": "Ashadujjaman",
+    "MiddleName": "",
+    "LastName": "Noyon",
+    "StudentId": "17103054",
+    "JoiningBatch": "Fall 2020",
+    "Department": 2,
+    "Degree": 5,
+    "SemesterAttend": {
+      "SemesterCode": null,
+      "Year": null,
+      "Courses": null
+    }
   },
   {
     "FirstName": "Ismail",
@@ -23,9 +50,36 @@
     "Department": 0,
     "Degree": 1,
     "SemesterAttend": {
-      "SemesterCode": "SUM",
+      "SemesterCode": "FAL",
       "Year": "2020",
       "Courses": [
+        {
+          "CourseId": "CSC 211",
+          "CourseName": "Theory Of Computing",
+          "InstructorName": "Marzia Hossain",
+          "NumberOfCredits": 4
+        }
+      ]
+    }
+  },
+  {
+    "FirstName": "Hridoy",
+    "MiddleName": "",
+    "LastName": "Ahamed",
+    "StudentId": "171-35-205",
+    "JoiningBatch": "Fall 2020",
+    "Department": 0,
+    "Degree": 4,
+    "SemesterAttend": {
+      "SemesterCode": "FAL",
+      "Year": "2020",
+      "Courses": [
+        {
+          "CourseId": "CSC 101",
+          "CourseName": "Computer Fundamental",
+          "InstructorName": "Tanzib Rahman",
+          "NumberOfCredits": 3
+        },
         {
           "CourseId": "CSC 301",
           "CourseName": "System Analysis & Design",
@@ -33,7 +87,20 @@
           "NumberOfCredits": 4
         }
       ]
-    },
-    "Courses": []
+    }
+  },
+  {
+    "FirstName": "Rana",
+    "MiddleName": "",
+    "LastName": "Rocky",
+    "StudentId": "567890",
+    "JoiningBatch": "Fall 2020",
+    "Department": 1,
+    "Degree": 6,
+    "SemesterAttend": {
+      "SemesterCode": "SUM",
+      "Year": "2019",
+      "Courses": []
+    }
   }
 ]

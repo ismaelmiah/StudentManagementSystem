@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using ClassLibrary.Entities;
 using ClassLibrary.Services;
 
@@ -18,9 +17,7 @@ namespace ClassLibrary.Models
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string StudentId { get; set; }
-
         public string JoiningBatch { get; set; } = GenerateBatch();
-
         public Department Department { get; set; }
         public Degree Degree { get; set; }
 
@@ -35,7 +32,6 @@ namespace ClassLibrary.Models
                 JoiningBatch = model.JoiningBatch,
                 Department = model.Department,
                 Degree = model.Degree,
-                Courses = new List<Course>(),
                 SemesterAttend = new Semester()
             };
             _studentServices.AddStudent(student);
@@ -52,7 +48,6 @@ namespace ClassLibrary.Models
                 JoiningBatch = model.JoiningBatch,
                 Department = model.Department,
                 Degree = model.Degree,
-                Courses = new List<Course>(),
                 SemesterAttend = new Semester()
             };
             _studentServices.AddStudent(student);

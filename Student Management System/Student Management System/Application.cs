@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Channels;
 using Autofac;
+using ClassLibrary;
 using ClassLibrary.Entities;
 using ClassLibrary.Models;
 using ClassLibrary.Utility;
@@ -9,18 +10,32 @@ namespace Student_Management_System
 {
     public class Application : IApplication
     {
+        private readonly IDataAccess _dataAccess;
 
+        public Application(IDataAccess dataAccess)
+        {
+            _dataAccess = dataAccess;
+        }
         public void Run()
         {
             while (true)
             {
-                Console.WriteLine("\tStudent Management System\n");
+                Console.WriteLine("\tStudent Management System\n\n\tList Of Students\n-----");
+                ListOfStudents();
                 Console.WriteLine("1. Add New Student");
                 Console.WriteLine("2. View Student Details");
                 Console.WriteLine("3. Delete Student");
-                var input = Convert.ToInt32(Console.ReadLine());
-                MainMenu(input);
+                var input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    MainMenu((Convert.ToInt32(input)));
+                }
             }
+        }
+
+        private void ListOfStudents()
+        {
+            _dataAccess.LoadAllData();
         }
         private static void MainMenu(int main)
         {
