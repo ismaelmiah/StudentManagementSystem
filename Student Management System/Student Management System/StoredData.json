@@ -1,0 +1,14 @@
+{
+  "FirstName": "Rocky",
+  "MiddleName": "",
+  "LastName": "Ahmad",
+  "StudentId": "171-35-175",
+  "JoiningBatch": "Fall 2020",
+  "Department": 2,
+  "Degree": 3,
+  "SemesterAttend": {
+    "SemesterCode": null,
+    "Year": null
+  },
+  "Courses": []
+}

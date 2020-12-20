@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ClassLibrary.Entities;
 using ClassLibrary.Services;
 
-namespace Student_Management_System.Models
+namespace ClassLibrary.Models
 {
     public class StudentModel
     {
@@ -12,11 +13,6 @@ namespace Student_Management_System.Models
         public StudentModel(IStudentServices studentServices)
         {
             _studentServices = studentServices;
-        }
-
-        public StudentModel()
-        {
-
         }
 
         public string FirstName { get; set; }

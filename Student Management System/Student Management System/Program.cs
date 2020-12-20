@@ -1,4 +1,6 @@
 ﻿using System;
+using Autofac;
+using ClassLibrary.Services;
 
 namespace Student_Management_System
 {
@@ -7,9 +9,11 @@ namespace Student_Management_System
         public static void Main(string[] args)
         {
             var config = ConfigureClass.Configure();
-
-
-            Console.ReadKey(true);
+            using (var scope = config.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<IApplication>();
+                app.Run();
+            }
         }
     }
 }

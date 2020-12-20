@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Student_Management_System.Models
+namespace ClassLibrary.Utility
 {
     public static class EnumUtil
     {

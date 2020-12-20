@@ -1,4 +1,6 @@
-﻿namespace ClassLibrary.Entities
+﻿using System;
+
+namespace ClassLibrary.Entities
 {
     public class Semester
     {

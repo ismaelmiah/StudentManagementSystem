@@ -1,4 +1,4 @@
-﻿namespace ClassLibrary.Services
+﻿namespace Student_Management_System
 {
     public interface IApplication
     {

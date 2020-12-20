@@ -1,18 +1,25 @@
 ﻿using System;
+using Autofac;
 using ClassLibrary.Entities;
+using ClassLibrary.Models;
+using ClassLibrary.Utility;
 
-namespace ClassLibrary.Services
+namespace Student_Management_System
 {
     public class Application : IApplication
     {
+
         public void Run()
         {
-            Console.WriteLine("\tStudent Management System\n");
-            Console.WriteLine("1. Add New Student");
-            Console.WriteLine("2. View Student Details");
-            Console.WriteLine("3. Delete Student");
-            var input = Convert.ToInt32(Console.ReadLine());
-            MainMenu(input);
+            while (true)
+            {
+                Console.WriteLine("\tStudent Management System\n");
+                Console.WriteLine("1. Add New Student");
+                Console.WriteLine("2. View Student Details");
+                Console.WriteLine("3. Delete Student");
+                var input = Convert.ToInt32(Console.ReadLine());
+                MainMenu(input);
+            }
         }
         private static void MainMenu(int main)
         {
@@ -28,12 +35,14 @@ namespace ClassLibrary.Services
                     Console.WriteLine("Application Closing, Thank You");
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(main), main, null);
+                    Console.WriteLine("Application Closed\n");
+                    Environment.Exit(0);
+                    break;
             }
         }
         private static void AddStudentGenerate()
         {
-            var student = new StudentModel();
+            var student = ConfigureClass.Configure().Resolve<StudentModel>();
             Console.WriteLine("\tTo Add a New Student, Enter the following Information\n");
             Console.Write("First Name: ");
             student.FirstName = Console.ReadLine();
