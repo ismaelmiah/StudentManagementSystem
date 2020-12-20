@@ -1,19 +1,5 @@
 [
   {
-    "FirstName": "OK",
-    "MiddleName": "OK",
-    "LastName": "OK",
-    "StudentId": "1122",
-    "JoiningBatch": "Fall 2020",
-    "Department": 1,
-    "Degree": 4,
-    "SemesterAttend": {
-      "SemesterCode": null,
-      "Year": null,
-      "Courses": null
-    }
-  },
-  {
     "FirstName": "Ismail",
     "MiddleName": "",
     "LastName": "Miah",
@@ -89,31 +75,72 @@
     }
   },
   {
-    "FirstName": "Rasel",
-    "MiddleName": "",
-    "LastName": "Miah",
-    "StudentId": "123456",
-    "JoiningBatch": "Fall 2020",
-    "Department": 1,
-    "Degree": 3,
-    "SemesterAttend": {
-      "SemesterCode": null,
-      "Year": null,
-      "Courses": null
-    }
-  },
-  {
-    "FirstName": "Raihan",
-    "MiddleName": "Bin",
-    "LastName": "Abeer",
-    "StudentId": "1222",
+    "FirstName": "OK",
+    "MiddleName": "OK",
+    "LastName": "OK",
+    "StudentId": "12221",
     "JoiningBatch": "Fall 2020",
     "Department": 1,
     "Degree": 6,
     "SemesterAttend": {
       "SemesterCode": null,
       "Year": null,
-      "Courses": null
+      "Courses": [
+        {
+          "CourseId": "CSC 301",
+          "CourseName": "System Analysis & Design",
+          "InstructorName": "Robel Khan",
+          "NumberOfCredits": 4
+        }
+      ]
+    }
+  },
+  {
+    "FirstName": "test",
+    "MiddleName": "test1",
+    "LastName": "test1",
+    "StudentId": "123",
+    "JoiningBatch": "Fall 2020",
+    "Department": 1,
+    "Degree": 6,
+    "SemesterAttend": {
+      "SemesterCode": "FAL",
+      "Year": "2019",
+      "Courses": [
+        {
+          "CourseId": "CSC 301",
+          "CourseName": "System Analysis & Design",
+          "InstructorName": "Robel Khan",
+          "NumberOfCredits": 4
+        }
+      ]
+    }
+  },
+  {
+    "FirstName": "AMI",
+    "MiddleName": "TUMI",
+    "LastName": "AMRA",
+    "StudentId": "12330",
+    "JoiningBatch": "Fall 2020",
+    "Department": 0,
+    "Degree": 5,
+    "SemesterAttend": {
+      "SemesterCode": "SPR",
+      "Year": "2020",
+      "Courses": [
+        {
+          "CourseId": "CSC 211",
+          "CourseName": "Theory Of Computing",
+          "InstructorName": "Marzia Hossain",
+          "NumberOfCredits": 4
+        },
+        {
+          "CourseId": "CSC 301",
+          "CourseName": "System Analysis & Design",
+          "InstructorName": "Robel Khan",
+          "NumberOfCredits": 4
+        }
+      ]
     }
   }
 ]

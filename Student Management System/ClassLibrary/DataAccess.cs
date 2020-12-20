@@ -24,15 +24,10 @@ namespace ClassLibrary
         #region Add Semester
         public void SaveSemester(string id, Semester data)
         {
-            
-            List<Student> students;
-            using (var r = new StreamReader(Path))
-            {
-                var json = r.ReadToEnd();
-                students = JsonConvert.DeserializeObject<List<Student>>(json);
-            }
 
+            var students = JsonDeserialization().ToList();
             var reqStudent = students.FirstOrDefault(x => x.StudentId == id);
+            reqStudent.SemesterAttend = data;
             var notTakenCourses = new CourseModel().Courses
                 .Except(reqStudent?.SemesterAttend.Courses ?? new List<Course>(),
                     new CourseComparer()).ToList();

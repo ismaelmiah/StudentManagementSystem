@@ -90,7 +90,6 @@ namespace ClassLibrary.Services
                     break;
             }
             student.SemesterAttend = new Semester();
-            
             _dataAccess.SaveStudent(new List<Student>(){ student });
         }
 
@@ -103,7 +102,7 @@ namespace ClassLibrary.Services
 
         public void ViewStudentDetails()
         {
-            Console.WriteLine("Enter Student ID to see details: ");
+            Console.Write("Enter Student ID to see details: ");
             var id = Console.ReadLine();
             _dataAccess.LoadData(id);
         }

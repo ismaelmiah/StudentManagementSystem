@@ -20,9 +20,15 @@ namespace Student_Management_System
                 Console.WriteLine("2 View Student Details");
                 Console.WriteLine("3 Delete Student");
                 var input = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(input))
+                if (string.IsNullOrWhiteSpace(input)) continue;
+                try
                 {
                     MainMenu((Convert.ToInt32(input)));
+                }
+                catch
+                {
+                    Console.WriteLine("Wrong Input, Application Closed");
+                    Environment.Exit(0);
                 }
             }
         }
