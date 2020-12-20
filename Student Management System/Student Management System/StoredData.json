@@ -1,5 +1,19 @@
 [
   {
+    "FirstName": "OK",
+    "MiddleName": "OK",
+    "LastName": "OK",
+    "StudentId": "1122",
+    "JoiningBatch": "Fall 2020",
+    "Department": 1,
+    "Degree": 4,
+    "SemesterAttend": {
+      "SemesterCode": null,
+      "Year": null,
+      "Courses": null
+    }
+  },
+  {
     "FirstName": "Ismail",
     "MiddleName": "",
     "LastName": "Miah",
@@ -72,6 +86,34 @@
           "NumberOfCredits": 4
         }
       ]
+    }
+  },
+  {
+    "FirstName": "Rasel",
+    "MiddleName": "",
+    "LastName": "Miah",
+    "StudentId": "123456",
+    "JoiningBatch": "Fall 2020",
+    "Department": 1,
+    "Degree": 3,
+    "SemesterAttend": {
+      "SemesterCode": null,
+      "Year": null,
+      "Courses": null
+    }
+  },
+  {
+    "FirstName": "Raihan",
+    "MiddleName": "Bin",
+    "LastName": "Abeer",
+    "StudentId": "1222",
+    "JoiningBatch": "Fall 2020",
+    "Department": 1,
+    "Degree": 6,
+    "SemesterAttend": {
+      "SemesterCode": null,
+      "Year": null,
+      "Courses": null
     }
   }
 ]

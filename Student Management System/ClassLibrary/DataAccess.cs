@@ -12,19 +12,19 @@ namespace ClassLibrary
     public class DataAccess : IDataAccess
     {
         private const string Path = @"../../../StoredData.json";
-        public void SaveData(List<Student> data)
+
+        #region New Student
+        public void SaveStudent(List<Student> data)
         {
-            using (var r = new StreamReader(Path))
-            {
-                var json = r.ReadToEnd();
-                var students = JsonConvert.DeserializeObject<List<Student>>(json);
-                data.AddRange(students);
-            }
+            data.AddRange(JsonDeserialization());
             JsonSerialization(data);
         }
-        public void SaveData(string id, Semester data)
+        #endregion
+
+        #region Add Semester
+        public void SaveSemester(string id, Semester data)
         {
-            var savedData = new List<Student>();
+            
             List<Student> students;
             using (var r = new StreamReader(Path))
             {
@@ -33,21 +33,17 @@ namespace ClassLibrary
             }
 
             var reqStudent = students.FirstOrDefault(x => x.StudentId == id);
-            if (reqStudent != null)
-            {
-                var listedCourse = new CourseModel().Courses
-                    .Except(reqStudent.SemesterAttend.Courses,
+            var notTakenCourses = new CourseModel().Courses
+                .Except(reqStudent?.SemesterAttend.Courses ?? new List<Course>(),
                     new CourseComparer()).ToList();
-                reqStudent.SemesterAttend = data;
-                
-                Console.Write("\n\tCourse List hasn’t taken by this Student.\n");
-                foreach (var course in listedCourse)
-                {
-                    Console.WriteLine(
-                        $"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
-                }
+
+            Console.Write("\n\tCourse List hasn’t taken by this Student.\n");
+            foreach (var course in notTakenCourses)
+            {
+                Console.WriteLine(
+                    $"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
             }
-            var newAll = students.FindAll(x => x.StudentId != id);
+            var without = students.FindAll(x => x.StudentId != id);
 
             while (true)
             {
@@ -58,14 +54,18 @@ namespace ClassLibrary
                 var course = Console.ReadLine();
                 var extraCourse = new CourseModel().Courses.FirstOrDefault(x => x.CourseId == course);
                 if (extraCourse == null) Console.WriteLine("Please Enter Right Course Code as it is.");
-                reqStudent?.SemesterAttend.Courses.Add(extraCourse);
+                reqStudent?.SemesterAttend.Courses?.Add(extraCourse);
             }
-            newAll.Add(reqStudent);
-            savedData.AddRange(newAll);
-
+            without.Add(reqStudent);
+            var savedData = new List<Student>();
+            savedData.AddRange(without);
             JsonSerialization(savedData);
         }
 
+
+        #endregion
+
+        #region JsonOperation
         private static void JsonSerialization<T>(List<T> data)
         {
             var jsonResult = JsonConvert.SerializeObject(data, Formatting.Indented);
@@ -87,7 +87,8 @@ namespace ClassLibrary
                 }
             }
         }
-        public void LoadData(string id)
+
+        private static IEnumerable<Student> JsonDeserialization()
         {
             List<Student> students;
             using (var r = new StreamReader(Path))
@@ -95,54 +96,77 @@ namespace ClassLibrary
                 var json = r.ReadToEnd();
                 students = JsonConvert.DeserializeObject<List<Student>>(json);
             }
-            var student = students.FirstOrDefault(x => x.StudentId == id);
-            if (student != null)
-            {
-                Console.WriteLine($"\nFull Name: {student.FirstName}\nMiddle Name: {student.MiddleName}\nLast Name: {student.LastName}\nStudent ID: {student.StudentId}\nJoining Batch: {student.JoiningBatch}\nDepartment: {student.Department}\nDegree: {student.Degree}\nSemester: {student.SemesterAttend.SemCodeResult(student.SemesterAttend.SemesterCode)}\nCourses: \n");
-                if (student.SemesterAttend.Courses != null)
-                {
+            return students;
+        }
+        #endregion
 
-                    foreach (var course in student.SemesterAttend.Courses)
-                    {
-                        Console.WriteLine($"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
-                    }
-                    Console.WriteLine("\n");
-                }
-            }
-            else
+        #region ViewStudentDetails
+        public void LoadData(string id)
+        {
+            var students = JsonDeserialization();
+            var student = students.FirstOrDefault(x => x.StudentId == id);
+            if (student == null)
             {
                 Console.WriteLine("Student Id not Found, Application Closed");
             }
-
-            Console.WriteLine("\n1. Add New Semester\n2. Go to main menu");
-            var response = Convert.ToInt32(Console.ReadLine());
-            switch (response)
+            else
             {
-                case 1:
-                    var config = ConfigureLibraryClass.Configure();
-                    using (var scope = config.BeginLifetimeScope())
+                Console.WriteLine($"" +
+                                  $"\nFull Name: {student.FirstName}" +
+                                  $"\nMiddle Name: {student.MiddleName}" +
+                                  $"\nLast Name: {student.LastName}" +
+                                  $"\nStudent ID: {student.StudentId}" +
+                                  $"\nJoining Batch: {student.JoiningBatch}" +
+                                  $"\nDepartment: {student.Department}" +
+                                  $"\nDegree: {student.Degree}" +
+                                  $"\nSemester: {student.SemesterAttend.SemCodeResult(student.SemesterAttend.SemesterCode)}" +
+                                  $"\nCourses: \n");
+
+                if (student.SemesterAttend.Courses != null)
+                {
+                    foreach (var course in student.SemesterAttend.Courses)
                     {
-                        var semester = scope.Resolve<SemesterModel>();
-                        semester.AddSemester(id);
+                        Console.WriteLine($"{course.CourseId}" +
+                                          $" - {course.CourseName}" +
+                                          $" - {course.InstructorName}" +
+                                          $" - {course.NumberOfCredits}");
                     }
-                    break;
-                case 2:
-                    break;
-                default:
-                    Console.WriteLine("Wrong Input, Application Closed");
-                    Environment.Exit(0);
-                    break;
+                    Console.WriteLine("\n");
+                }
+
+                Console.WriteLine("\n1. Add New Semester\n2. Go to main menu");
+                var response = Convert.ToInt32(Console.ReadLine());
+                switch (response)
+                {
+                    case 1:
+                        AddNewSemester(id);
+                        break;
+                    case 2:
+                        return;
+                    default:
+                        Console.WriteLine("Wrong Input, Application Closed");
+                        Environment.Exit(0);
+                        break;
+                }
+
+            }
+        }
+        private static void AddNewSemester(string id)
+        {
+            var config = ConfigureLibraryClass.Configure();
+            using (var scope = config.BeginLifetimeScope())
+            {
+                var semester = scope.Resolve<SemesterModel>();
+                semester.AddSemester(id);
             }
         }
 
-        public void DeleteData(string id)
+        #endregion
+
+        #region DeleteStudent
+        public void DeleteStudent(string id)
         {
-            List<Student> students;
-            using (var r = new StreamReader(Path))
-            {
-                var json = r.ReadToEnd();
-                students = JsonConvert.DeserializeObject<List<Student>>(json);
-            }
+            var students = JsonDeserialization().ToList();
             var student = students.FirstOrDefault(x => x.StudentId == id);
             if (student != null)
             {
@@ -150,27 +174,26 @@ namespace ClassLibrary
                 JsonSerialization(otherStudents);
                 Console.WriteLine("Record Deleted Successful");
             }
-
             else
             {
                 Console.WriteLine("Student Id Not Found, Check Id.");
             }
         }
+        #endregion
+
+        #region ListOfStudents
+
 
         public void LoadAllData()
         {
-            List<Student> students;
-            using (var r = new StreamReader(Path))
-            {
-                var json = r.ReadToEnd();
-                students = JsonConvert.DeserializeObject<List<Student>>(json);
-
-            }
+            var students = JsonDeserialization();
             if (students != null)
             {
                 foreach (var student in students)
                 {
-                    Console.WriteLine($"\nName: {student.FirstName}\tStudent ID: {student.StudentId}");
+                    Console.WriteLine($"\nName: {student.FirstName}" +
+                                      $"\tStudent ID: {student.StudentId}");
+
                     if (student.SemesterAttend.Courses == null || (student.SemesterAttend.Courses != null && student.SemesterAttend.Courses.Count == 0)) continue;
                     Console.WriteLine("Courses: ");
                     foreach (var course in student.SemesterAttend.Courses)
@@ -185,5 +208,7 @@ namespace ClassLibrary
                 Console.WriteLine("No Student Added");
             }
         }
+
+        #endregion
     }
 }

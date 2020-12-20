@@ -15,7 +15,6 @@ namespace Student_Management_System
             builder.RegisterType<Application>().As<IApplication>();
             builder.RegisterType<StudentServices>().As<IStudentServices>();
             builder.RegisterType<DataAccess>().As<IDataAccess>();
-            builder.RegisterType<StudentModel>().AsSelf();
             
             
             //builder.RegisterAssemblyTypes(Assembly.Load(nameof(ClassLibrary)))

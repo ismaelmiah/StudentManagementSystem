@@ -1,5 +1,4 @@
-﻿using System.Net.Mime;
-using Autofac;
+﻿using Autofac;
 using ClassLibrary.Models;
 using ClassLibrary.Services;
 
