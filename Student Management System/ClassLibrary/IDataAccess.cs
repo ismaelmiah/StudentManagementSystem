@@ -6,9 +6,10 @@ namespace ClassLibrary
 {
     public interface IDataAccess
     {
-        void SaveData<T>(List<T> data);
+        void SaveData(List<Student> data);
         void SaveData(string id, Semester data);
         void LoadData(string id);
+        void DeleteData(string id);
         void LoadAllData();
     }
 }

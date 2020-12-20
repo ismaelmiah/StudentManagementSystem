@@ -1,47 +1,5 @@
 [
   {
-    "FirstName": "Rasel",
-    "MiddleName": "",
-    "LastName": "Roni",
-    "StudentId": "567803",
-    "JoiningBatch": "Fall 2020",
-    "Department": 1,
-    "Degree": 6,
-    "SemesterAttend": {
-      "SemesterCode": null,
-      "Year": null,
-      "Courses": null
-    }
-  },
-  {
-    "FirstName": "Rahim",
-    "MiddleName": "mowla",
-    "LastName": "Rashid",
-    "StudentId": "145500",
-    "JoiningBatch": "Fall 2020",
-    "Department": 1,
-    "Degree": 3,
-    "SemesterAttend": {
-      "SemesterCode": null,
-      "Year": null,
-      "Courses": null
-    }
-  },
-  {
-    "FirstName": "Ashadujjaman",
-    "MiddleName": "",
-    "LastName": "Noyon",
-    "StudentId": "17103054",
-    "JoiningBatch": "Fall 2020",
-    "Department": 2,
-    "Degree": 5,
-    "SemesterAttend": {
-      "SemesterCode": null,
-      "Year": null,
-      "Courses": null
-    }
-  },
-  {
     "FirstName": "Ismail",
     "MiddleName": "",
     "LastName": "Miah",
@@ -90,17 +48,30 @@
     }
   },
   {
-    "FirstName": "Rana",
+    "FirstName": "Keiuom",
     "MiddleName": "",
-    "LastName": "Rocky",
-    "StudentId": "567890",
+    "LastName": "Miah",
+    "StudentId": "171-35-199",
     "JoiningBatch": "Fall 2020",
-    "Department": 1,
-    "Degree": 6,
+    "Department": 0,
+    "Degree": 1,
     "SemesterAttend": {
       "SemesterCode": "SUM",
       "Year": "2019",
-      "Courses": []
+      "Courses": [
+        {
+          "CourseId": "CSC 101",
+          "CourseName": "Computer Fundamental",
+          "InstructorName": "Tanzib Rahman",
+          "NumberOfCredits": 3
+        },
+        {
+          "CourseId": "CSC 211",
+          "CourseName": "Theory Of Computing",
+          "InstructorName": "Marzia Hossain",
+          "NumberOfCredits": 4
+        }
+      ]
     }
   }
 ]

@@ -20,7 +20,7 @@ namespace Student_Management_System
         {
             while (true)
             {
-                Console.WriteLine("\tStudent Management System\n\n\tList Of Students\n-----");
+                Console.WriteLine("\n\n\tStudent Management System\n\n\tList Of Students\n-----");
                 ListOfStudents();
                 Console.WriteLine("1. Add New Student");
                 Console.WriteLine("2. View Student Details");
@@ -37,7 +37,7 @@ namespace Student_Management_System
         {
             _dataAccess.LoadAllData();
         }
-        private static void MainMenu(int main)
+        private void MainMenu(int main)
         {
             switch (main)
             {
@@ -48,13 +48,20 @@ namespace Student_Management_System
                     ViewStudentDetails();
                     break;
                 case 3:
-                    Console.WriteLine("Application Closing, Thank You");
+                    DeleteStudent();
                     break;
                 default:
                     Console.WriteLine("Application Closed\n");
                     Environment.Exit(0);
                     break;
             }
+        }
+
+        private void DeleteStudent()
+        {
+            Console.Write("Enter Student ID to Delete the record: ");
+            var id = Console.ReadLine();
+            _dataAccess.DeleteData(id);
         }
 
         private static void ViewStudentDetails()
