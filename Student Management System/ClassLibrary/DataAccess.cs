@@ -22,7 +22,6 @@ namespace ClassLibrary
             }
             JsonSerialization(data);
         }
-
         public void SaveData(string id, Semester data)
         {
             var savedData = new List<Student>();
@@ -32,18 +31,37 @@ namespace ClassLibrary
                 var json = r.ReadToEnd();
                 students = JsonConvert.DeserializeObject<List<Student>>(json);
             }
+
             var reqStudent = students.FirstOrDefault(x => x.StudentId == id);
             if (reqStudent != null)
             {
+                var listedCourse = new CourseModel().Courses
+                    .Except(reqStudent.SemesterAttend.Courses,
+                    new CourseComparer()).ToList();
                 reqStudent.SemesterAttend = data;
-                var newAll = students.FindAll(x => x.StudentId != id);
-                newAll.Add(reqStudent);
-                savedData.AddRange(newAll);
+                
+                Console.Write("\n\tCourse List hasn’t taken by this Student.\n");
+                foreach (var course in listedCourse)
+                {
+                    Console.WriteLine(
+                        $"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
+                }
             }
-            else
+            var newAll = students.FindAll(x => x.StudentId != id);
+
+            while (true)
             {
-                Console.WriteLine("Problem to Adding Semester.");
+                Console.Write("\n1. Course Add Done \n2. Add New Course\nInput: ");
+                var courseId = Console.ReadLine();
+                if (Convert.ToInt32(courseId) == 1) break;
+                Console.Write("Course Code: ");
+                var course = Console.ReadLine();
+                var extraCourse = new CourseModel().Courses.FirstOrDefault(x => x.CourseId == course);
+                if (extraCourse == null) Console.WriteLine("Please Enter Right Course Code as it is.");
+                reqStudent?.SemesterAttend.Courses.Add(extraCourse);
             }
+            newAll.Add(reqStudent);
+            savedData.AddRange(newAll);
 
             JsonSerialization(savedData);
         }
@@ -146,7 +164,7 @@ namespace ClassLibrary
             {
                 var json = r.ReadToEnd();
                 students = JsonConvert.DeserializeObject<List<Student>>(json);
-                
+
             }
             if (students != null)
             {

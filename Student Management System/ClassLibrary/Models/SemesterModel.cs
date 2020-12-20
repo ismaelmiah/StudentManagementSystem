@@ -26,27 +26,6 @@ namespace ClassLibrary.Models
             Console.Write("Year: ");
             Year = Console.ReadLine();
             Console.Write($"Year: {Year}");
-            Console.Write("\n\tCourse List, Enter Course Code to Added for This Student.\n");
-            foreach (var course in new CourseModel().Courses)
-            {
-                Console.WriteLine($"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
-            }
-
-            while (true)
-            {
-                Console.Write("\n1. Course Add Done \n2. Add New Course\nInput: ");
-                var courseId = Console.ReadLine();
-                if (Convert.ToInt32(courseId) == 1) break;
-                else
-                {
-                    Console.Write("Course Code: ");
-                    var course = Console.ReadLine();
-                    var extraCourse = new CourseModel().Courses.FirstOrDefault(x => x.CourseId == course);
-                    if (extraCourse == null) Console.WriteLine("Please Enter Right Course Code as it is.");
-                    semester.Courses.Add(extraCourse);
-                }
-            }
-
             semester.Year = Year;
             semester.SemesterCode = SemesterCode;
             _semesterServices.AddSemester(id, semester);
