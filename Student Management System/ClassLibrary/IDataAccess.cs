@@ -5,6 +5,8 @@ namespace ClassLibrary
 {
     public interface IDataAccess
     {
-        void SaveData<T>(T data);
+        void SaveData<T>(List<T> data);
+        void LoadData(string id);
+        void LoadAllData();
     }
 }

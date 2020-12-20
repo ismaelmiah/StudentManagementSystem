@@ -6,5 +6,6 @@ namespace ClassLibrary.Services
     {
         void AddStudent(Student student);
         void DeleteStudent(Student student);
+        void ViewStudentDetails(string id);
     }
 }

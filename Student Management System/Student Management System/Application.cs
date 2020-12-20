@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Channels;
 using Autofac;
 using ClassLibrary.Entities;
 using ClassLibrary.Models;
@@ -29,7 +30,7 @@ namespace Student_Management_System
                     AddStudentGenerate();
                     break;
                 case 2:
-                    Console.WriteLine("Application Closing, Thank You");
+                    ViewStudentDetails();
                     break;
                 case 3:
                     Console.WriteLine("Application Closing, Thank You");
@@ -40,6 +41,15 @@ namespace Student_Management_System
                     break;
             }
         }
+
+        private static void ViewStudentDetails()
+        {
+            var student = ConfigureClass.Configure().Resolve<StudentModel>();
+            Console.WriteLine("Enter Student ID to see details: ");
+            var id = Console.ReadLine();
+            student.ViewStudentDetails(id);
+        }
+
         private static void AddStudentGenerate()
         {
             var student = ConfigureClass.Configure().Resolve<StudentModel>();
@@ -63,7 +73,7 @@ namespace Student_Management_System
 
             Console.Write("\nDepartment: ");
             var department = Console.ReadLine();
-            var checkDepartment = (Department) Enum.Parse(typeof(Department), department ?? string.Empty);
+            var checkDepartment = (Department)Enum.Parse(typeof(Department), department ?? string.Empty);
             student.Department = checkDepartment switch
             {
                 Department.ComputerScience => Department.ComputerScience,
@@ -81,7 +91,7 @@ namespace Student_Management_System
 
             Console.Write("\nDegree: ");
             var degree = Console.ReadLine();
-            var checkDegree = (Degree) Enum.Parse(typeof(Degree), degree ?? string.Empty);
+            var checkDegree = (Degree)Enum.Parse(typeof(Degree), degree ?? string.Empty);
             student.Degree = checkDegree switch
             {
                 Degree.BSC => Degree.BSC,
@@ -93,6 +103,7 @@ namespace Student_Management_System
                 _ => throw new ArgumentOutOfRangeException()
             };
             student.AddStudent(student);
+
         }
     }
 }

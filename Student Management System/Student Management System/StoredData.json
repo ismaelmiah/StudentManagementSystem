@@ -1,14 +1,30 @@
-{
-  "FirstName": "Rocky",
-  "MiddleName": "",
-  "LastName": "Ahmad",
-  "StudentId": "171-35-175",
-  "JoiningBatch": "Fall 2020",
-  "Department": 2,
-  "Degree": 3,
-  "SemesterAttend": {
-    "SemesterCode": null,
-    "Year": null
+[
+  {
+    "FirstName": "Rana",
+    "MiddleName": "",
+    "LastName": "Rocky",
+    "StudentId": "567890",
+    "JoiningBatch": "Fall 2020",
+    "Department": 1,
+    "Degree": 6,
+    "SemesterAttend": {
+      "SemesterCode": null,
+      "Year": null
+    },
+    "Courses": []
   },
-  "Courses": []
-}
+  {
+    "FirstName": "Ismail",
+    "MiddleName": "",
+    "LastName": "Miah",
+    "StudentId": "171-35-196",
+    "JoiningBatch": "Fall 2020",
+    "Department": 0,
+    "Degree": 1,
+    "SemesterAttend": {
+      "SemesterCode": null,
+      "Year": null
+    },
+    "Courses": []
+  }
+]

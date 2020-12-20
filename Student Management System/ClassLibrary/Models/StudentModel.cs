@@ -59,6 +59,10 @@ namespace ClassLibrary.Models
             _studentServices.AddStudent(student);
         }
 
+        public void ViewStudentDetails(string id)
+        {
+            _studentServices.ViewStudentDetails(id);
+        }
         public static string GenerateBatch()
         {
             var months = DateTime.Today.Month;
@@ -79,5 +83,6 @@ namespace ClassLibrary.Models
             batch += $" {DateTime.Today.Year}";
             return batch;
         }
+        
     }
 }

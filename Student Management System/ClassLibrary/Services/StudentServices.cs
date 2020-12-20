@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using ClassLibrary.Entities;
 using Newtonsoft.Json;
 
@@ -14,12 +15,17 @@ namespace ClassLibrary.Services
         }
         public void AddStudent(Student student)
         {
-            _dataAccess.SaveData(student);
+            _dataAccess.SaveData(new List<Student>(){ student });
         }
 
         public void DeleteStudent(Student student)
         {
 
+        }
+
+        public void ViewStudentDetails(string Id)
+        {
+            _dataAccess.LoadData(Id);
         }
     }
 }

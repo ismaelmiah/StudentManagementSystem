@@ -12,7 +12,7 @@ namespace ClassLibrary.Services
         }
         public void AddSemester(Semester semester)
         {
-            _dataAccess.SaveData(semester);
+            //_dataAccess.SaveData(semester);
         }
     }
 }
