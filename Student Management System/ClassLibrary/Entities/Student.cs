@@ -12,7 +12,7 @@ namespace ClassLibrary.Entities
         public string JoiningBatch { get; set; } = GenerateBatch();
         public Department Department { get; set; }
         public Degree Degree { get; set; }
-        public Semester SemesterAttend { get; set; }
+        public List<Semester> SemesterAttend { get; set; }
 
         public static string GenerateBatch()
         {

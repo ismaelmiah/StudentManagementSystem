@@ -1,4 +1,5 @@
-﻿using ClassLibrary.Entities;
+﻿using System.Collections.Generic;
+using ClassLibrary.Entities;
 
 namespace ClassLibrary.Services
 {
@@ -10,7 +11,7 @@ namespace ClassLibrary.Services
         {
             _dataAccess = dataAccess;
         }
-        public void AddSemester(string id, Semester semester)
+        public void AddSemester(string id, List<Semester> semester)
         {
             _dataAccess.SaveSemester(id, semester);
         }

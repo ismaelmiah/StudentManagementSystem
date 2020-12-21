@@ -16,30 +16,39 @@ namespace ClassLibrary
         #region New Student
         public void SaveStudent(List<Student> data)
         {
-            data.AddRange(JsonDeserialization());
+            //var prevData = JsonDeserialization().ToList();
+            //data.AddRange(prevData);
             JsonSerialization(data);
         }
         #endregion
 
         #region Add Semester
-        public void SaveSemester(string id, Semester data)
+        public void SaveSemester(string id, List<Semester> data)
         {
 
             var students = JsonDeserialization().ToList();
             var reqStudent = students.FirstOrDefault(x => x.StudentId == id);
-            reqStudent.SemesterAttend = data;
-            var notTakenCourses = new CourseModel().Courses
-                .Except(reqStudent?.SemesterAttend.Courses ?? new List<Course>(),
-                    new CourseComparer()).ToList();
+            var data1 = new List<Semester>();
+            var data3 = new CourseModel();
+            var data2 = new Semester { Courses = data3.Courses };
+            var data4 = reqStudent.SemesterAttend.SelectMany(x => x.Courses.ToList()).ToList();
 
+            data1.Add(data2);
+            //    .FirstOrDefault(a=>a.Year!=data.TrueForAll(b=>b.Year==));
+            var notTakenCourses = new CourseModel().Courses
+                .Except(data4 ?? new List<Course>(),
+                    new CourseComparer()).ToList();
+            //var notTakenCourses = data1.Except(reqStudent?.SemesterAttend ?? data1,
+            //        new CourseComparer()).ToList();
+            var listedData = notTakenCourses;//notTakenCourses.Select(sem => sem.Courses.ToList()).SelectMany(dat3a => dat3a);
             Console.Write("\n\tCourse List hasn’t taken by this Student.\n");
-            foreach (var course in notTakenCourses)
+            foreach (var course1 in listedData)
             {
                 Console.WriteLine(
-                    $"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
+                    $"{course1.CourseId} - {course1.CourseName} - {course1.InstructorName} - {course1.NumberOfCredits}");
             }
             var without = students.FindAll(x => x.StudentId != id);
-
+            var newSemester = new Semester { Courses = new List<Course>() };
             while (true)
             {
                 Console.Write("\n1. Course Add Done \n2. Add New Course\nInput: ");
@@ -49,8 +58,11 @@ namespace ClassLibrary
                 var course = Console.ReadLine();
                 var extraCourse = new CourseModel().Courses.FirstOrDefault(x => x.CourseId == course);
                 if (extraCourse == null) Console.WriteLine("Please Enter Right Course Code as it is.");
-                reqStudent?.SemesterAttend.Courses?.Add(extraCourse);
+                newSemester.Courses.Add(extraCourse);
             }
+            newSemester.Year = data[0].Year;
+            newSemester.SemesterCode = data[0].SemesterCode;
+            reqStudent?.SemesterAttend?.Add(newSemester);
             without.Add(reqStudent);
             var savedData = new List<Student>();
             savedData.AddRange(without);
@@ -113,19 +125,22 @@ namespace ClassLibrary
                                   $"\nStudent ID: {student.StudentId}" +
                                   $"\nJoining Batch: {student.JoiningBatch}" +
                                   $"\nDepartment: {student.Department}" +
-                                  $"\nDegree: {student.Degree}" +
-                                  $"\nSemester: {student.SemesterAttend.SemCodeResult(student.SemesterAttend.SemesterCode)}" +
-                                  $"\nCourses: \n");
-
-                if (student.SemesterAttend.Courses != null)
+                                  $"\nDegree: {student.Degree}");
+                if (student.SemesterAttend != null)
                 {
-                    foreach (var course in student.SemesterAttend.Courses)
+                    foreach (var semester in student.SemesterAttend)
                     {
-                        Console.WriteLine($"{course.CourseId}" +
-                                          $" - {course.CourseName}" +
-                                          $" - {course.InstructorName}" +
-                                          $" - {course.NumberOfCredits}");
+                        Console.WriteLine($"\nSemester: {semester.SemCodeResult(semester.SemesterCode)} {semester.Year}"); Console.WriteLine($"Courses:");
+                        foreach (var semesterCourse in semester.Courses)
+                        {
+                            Console.WriteLine($"{semesterCourse.CourseId}" +
+                                              $" - {semesterCourse.CourseName}" +
+                                              $" - {semesterCourse.InstructorName}" +
+                                              $" - {semesterCourse.NumberOfCredits}");
+                        }
                     }
+
+
                     Console.WriteLine("\n");
                 }
 
@@ -176,34 +191,34 @@ namespace ClassLibrary
         }
         #endregion
 
-        #region ListOfStudents
+        //#region ListOfStudents
 
 
-        public void LoadAllData()
-        {
-            var students = JsonDeserialization();
-            if (students != null)
-            {
-                foreach (var student in students)
-                {
-                    Console.WriteLine($"\nName: {student.FirstName}" +
-                                      $"\tStudent ID: {student.StudentId}");
+        //public void LoadAllData()
+        //{
+        //    var students = JsonDeserialization();
+        //    if (students != null)
+        //    {
+        //        foreach (var student in students)
+        //        {
+        //            Console.WriteLine($"\nName: {student.FirstName}" +
+        //                              $"\tStudent ID: {student.StudentId}");
 
-                    if (student.SemesterAttend.Courses == null || (student.SemesterAttend.Courses != null && student.SemesterAttend.Courses.Count == 0)) continue;
-                    Console.WriteLine("Courses: ");
-                    foreach (var course in student.SemesterAttend.Courses)
-                    {
-                        Console.WriteLine($"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
-                    }
-                }
-                Console.WriteLine("\n");
-            }
-            else
-            {
-                Console.WriteLine("No Student Added");
-            }
-        }
+        //            if (student.SemesterAttend.Courses == null || (student.SemesterAttend.Courses != null && student.SemesterAttend.Courses.Count == 0)) continue;
+        //            Console.WriteLine("Courses: ");
+        //            foreach (var course in student.SemesterAttend.Courses)
+        //            {
+        //                Console.WriteLine($"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
+        //            }
+        //        }
+        //        Console.WriteLine("\n");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("No Student Added");
+        //    }
+        //}
 
-        #endregion
+        //#endregion
     }
 }

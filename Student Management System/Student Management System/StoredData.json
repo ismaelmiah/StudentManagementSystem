@@ -1,146 +1,37 @@
 [
   {
-    "FirstName": "Ismail",
-    "MiddleName": "",
-    "LastName": "Miah",
-    "StudentId": "171-35-196",
+    "FirstName": "Raihan",
+    "MiddleName": "Ahmed",
+    "LastName": "Khan",
+    "StudentId": "122",
     "JoiningBatch": "Fall 2020",
     "Department": 0,
     "Degree": 1,
-    "SemesterAttend": {
-      "SemesterCode": "FAL",
-      "Year": "2020",
-      "Courses": [
-        {
-          "CourseId": "CSC 211",
-          "CourseName": "Theory Of Computing",
-          "InstructorName": "Marzia Hossain",
-          "NumberOfCredits": 4
-        }
-      ]
-    }
-  },
-  {
-    "FirstName": "Hridoy",
-    "MiddleName": "",
-    "LastName": "Ahamed",
-    "StudentId": "171-35-205",
-    "JoiningBatch": "Fall 2020",
-    "Department": 0,
-    "Degree": 4,
-    "SemesterAttend": {
-      "SemesterCode": "FAL",
-      "Year": "2020",
-      "Courses": [
-        {
-          "CourseId": "CSC 101",
-          "CourseName": "Computer Fundamental",
-          "InstructorName": "Tanzib Rahman",
-          "NumberOfCredits": 3
-        },
-        {
-          "CourseId": "CSC 301",
-          "CourseName": "System Analysis & Design",
-          "InstructorName": "Robel Khan",
-          "NumberOfCredits": 4
-        }
-      ]
-    }
-  },
-  {
-    "FirstName": "Keiuom",
-    "MiddleName": "",
-    "LastName": "Miah",
-    "StudentId": "171-35-199",
-    "JoiningBatch": "Fall 2020",
-    "Department": 0,
-    "Degree": 1,
-    "SemesterAttend": {
-      "SemesterCode": "SUM",
-      "Year": "2019",
-      "Courses": [
-        {
-          "CourseId": "CSC 101",
-          "CourseName": "Computer Fundamental",
-          "InstructorName": "Tanzib Rahman",
-          "NumberOfCredits": 3
-        },
-        {
-          "CourseId": "CSC 211",
-          "CourseName": "Theory Of Computing",
-          "InstructorName": "Marzia Hossain",
-          "NumberOfCredits": 4
-        }
-      ]
-    }
-  },
-  {
-    "FirstName": "OK",
-    "MiddleName": "OK",
-    "LastName": "OK",
-    "StudentId": "12221",
-    "JoiningBatch": "Fall 2020",
-    "Department": 1,
-    "Degree": 6,
-    "SemesterAttend": {
-      "SemesterCode": null,
-      "Year": null,
-      "Courses": [
-        {
-          "CourseId": "CSC 301",
-          "CourseName": "System Analysis & Design",
-          "InstructorName": "Robel Khan",
-          "NumberOfCredits": 4
-        }
-      ]
-    }
-  },
-  {
-    "FirstName": "test",
-    "MiddleName": "test1",
-    "LastName": "test1",
-    "StudentId": "123",
-    "JoiningBatch": "Fall 2020",
-    "Department": 1,
-    "Degree": 6,
-    "SemesterAttend": {
-      "SemesterCode": "FAL",
-      "Year": "2019",
-      "Courses": [
-        {
-          "CourseId": "CSC 301",
-          "CourseName": "System Analysis & Design",
-          "InstructorName": "Robel Khan",
-          "NumberOfCredits": 4
-        }
-      ]
-    }
-  },
-  {
-    "FirstName": "AMI",
-    "MiddleName": "TUMI",
-    "LastName": "AMRA",
-    "StudentId": "12330",
-    "JoiningBatch": "Fall 2020",
-    "Department": 0,
-    "Degree": 5,
-    "SemesterAttend": {
-      "SemesterCode": "SPR",
-      "Year": "2020",
-      "Courses": [
-        {
-          "CourseId": "CSC 211",
-          "CourseName": "Theory Of Computing",
-          "InstructorName": "Marzia Hossain",
-          "NumberOfCredits": 4
-        },
-        {
-          "CourseId": "CSC 301",
-          "CourseName": "System Analysis & Design",
-          "InstructorName": "Robel Khan",
-          "NumberOfCredits": 4
-        }
-      ]
-    }
+    "SemesterAttend": [
+      {
+        "SemesterCode": "SPR",
+        "Year": "2021",
+        "Courses": [
+          {
+            "CourseId": "CSC 101",
+            "CourseName": "Computer Fundamental",
+            "InstructorName": "Tanzib Rahman",
+            "NumberOfCredits": 3
+          }
+        ]
+      },
+      {
+        "SemesterCode": "SUM 2021",
+        "Year": "2021",
+        "Courses": [
+          {
+            "CourseId": "CSC 201",
+            "CourseName": "Database Fundamental",
+            "InstructorName": "Kawsar Ahamed",
+            "NumberOfCredits": 4
+          }
+        ]
+      }
+    ]
   }
 ]

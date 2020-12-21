@@ -18,16 +18,16 @@ namespace ClassLibrary.Models
         public string Year { get; set; }
         public void AddSemester(string id)
         {
-            var semester = new Semester {Courses = new List<Course>()};
+            var semester = new Semester ();
             Console.WriteLine("\tTo Add a New Semester, Enter the following Information\n");
             Console.Write("Semester Code(SUM for Summer,FAL for Fall,SPR for Spring): ");
             SemesterCode = Console.ReadLine();
             Console.Write("Year: ");
             Year = Console.ReadLine();
-            Console.Write($"Year: {Year}");
             semester.Year = Year;
             semester.SemesterCode = SemesterCode;
-            _semesterServices.AddSemester(id, semester);
+            semester.Courses = new List<Course>();
+            _semesterServices.AddSemester(id, new List<Semester>(){ semester });
         }
     }
 }

@@ -89,16 +89,17 @@ namespace ClassLibrary.Services
                     Console.WriteLine("Wrong Input----");
                     break;
             }
-            student.SemesterAttend = new Semester();
+
+            student.SemesterAttend = new List<Semester>();
             _dataAccess.SaveStudent(new List<Student>(){ student });
         }
 
-        public void DeleteStudent()
-        {
-            Console.Write("Enter Student ID to Delete the record: ");
-            var id = Console.ReadLine();
-            _dataAccess.DeleteStudent(id);
-        }
+        //public void DeleteStudent()
+        //{
+        //    Console.Write("Enter Student ID to Delete the record: ");
+        //    var id = Console.ReadLine();
+        //    _dataAccess.DeleteStudent(id);
+        //}
 
         public void ViewStudentDetails()
         {
@@ -107,9 +108,9 @@ namespace ClassLibrary.Services
             _dataAccess.LoadData(id);
         }
 
-        public void ListOfStudent()
-        {
-            _dataAccess.LoadAllData();
-        }
+        //public void ListOfStudent()
+        //{
+        //    _dataAccess.LoadAllData();
+        //}
     }
 }
