@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Autofac;
 using ClassLibrary.Entities;
 using ClassLibrary.Models;
@@ -14,35 +15,38 @@ namespace ClassLibrary
         private const string Path = @"../../../StoredData.json";
 
         #region New Student
-        public void SaveStudent(List<Student> data)
+        public async void SaveStudent(List<Student> data)
         {
-            //var prevData = JsonDeserialization().ToList();
-            //data.AddRange(prevData);
-            JsonSerialization(data);
+            var prevData = await JsonDeserialization();
+            try
+            {
+                var count = prevData.Where(student => student.StudentId == data.ToArray()[0].StudentId).ToList().Count();
+                if (count>=1) throw new InvalidDataException();
+                data.AddRange(prevData);
+                JsonSerialization(data);
+                Console.WriteLine("New Student Added Successfully");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("\n\nStudent not Added.\nThis Student ID is Already Assigned" +
+                                  " To Another Student.\n Enter Unique ID");
+            }
         }
         #endregion
 
         #region Add Semester
-        public void SaveSemester(string id, List<Semester> data)
+        public async void SaveSemester(string id, List<Semester> data)
         {
 
-            var students = JsonDeserialization().ToList();
+            var students = await JsonDeserialization();
             var reqStudent = students.FirstOrDefault(x => x.StudentId == id);
-            var data1 = new List<Semester>();
-            var data3 = new CourseModel();
-            var data2 = new Semester { Courses = data3.Courses };
-            var data4 = reqStudent.SemesterAttend.SelectMany(x => x.Courses.ToList()).ToList();
-
-            data1.Add(data2);
-            //    .FirstOrDefault(a=>a.Year!=data.TrueForAll(b=>b.Year==));
+            var data4 = reqStudent?.SemesterAttend.SelectMany(x => x.Courses.ToList()).ToList();
             var notTakenCourses = new CourseModel().Courses
                 .Except(data4 ?? new List<Course>(),
                     new CourseComparer()).ToList();
-            //var notTakenCourses = data1.Except(reqStudent?.SemesterAttend ?? data1,
-            //        new CourseComparer()).ToList();
-            var listedData = notTakenCourses;//notTakenCourses.Select(sem => sem.Courses.ToList()).SelectMany(dat3a => dat3a);
+            
             Console.Write("\n\tCourse List hasn’t taken by this Student.\n");
-            foreach (var course1 in listedData)
+            foreach (var course1 in notTakenCourses)
             {
                 Console.WriteLine(
                     $"{course1.CourseId} - {course1.CourseName} - {course1.InstructorName} - {course1.NumberOfCredits}");
@@ -54,24 +58,50 @@ namespace ClassLibrary
                 Console.Write("\n1. Course Add Done \n2. Add New Course\nInput: ");
                 var courseId = Console.ReadLine();
                 if (Convert.ToInt32(courseId) == 1) break;
-                Console.Write("Course Code: ");
-                var course = Console.ReadLine();
-                var extraCourse = new CourseModel().Courses.FirstOrDefault(x => x.CourseId == course);
-                if (extraCourse == null) Console.WriteLine("Please Enter Right Course Code as it is.");
-                newSemester.Courses.Add(extraCourse);
+                if(Convert.ToInt32(courseId) !=2) Console.WriteLine("Enter Correct Response.");
+                while (true)
+                {
+                    try
+                    {
+                        Console.Write("Course Code (XXX YYY) eg: CSC 301: ");
+                        var course = Console.ReadLine();
+                        var extraCourse = new CourseModel().Courses.FirstOrDefault(x => x.CourseId == course);
+                        if(extraCourse==null)
+                            throw new InvalidDataException();
+                        newSemester.Courses.Add(extraCourse);
+                        break;
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine($"Please Enter Right Course Code as it is.\n{exception}\n");
+                    }
+                }
             }
             newSemester.Year = data[0].Year;
             newSemester.SemesterCode = data[0].SemesterCode;
-            reqStudent?.SemesterAttend?.Add(newSemester);
+            if(newSemester.Courses.Any()) reqStudent?.SemesterAttend?.Add(newSemester);
             without.Add(reqStudent);
             var savedData = new List<Student>();
             savedData.AddRange(without);
             JsonSerialization(savedData);
+            Console.WriteLine("New Semester Added Successfully");
         }
 
 
         #endregion
 
+        private async Task<Tuple<List<Student>, Student>> IsValidStudent(string id)
+        {
+            var students = await JsonDeserialization();
+            var student = students.FirstOrDefault(x => x.StudentId == id);
+            return new Tuple<List<Student>, Student>(students, student);
+        }
+        private async Task<List<Student>> IsValidStudent()
+        {
+            var students = await JsonDeserialization();
+            return students;
+        }
+        
         #region JsonOperation
         private static void JsonSerialization<T>(List<T> data)
         {
@@ -95,7 +125,7 @@ namespace ClassLibrary
             }
         }
 
-        private static IEnumerable<Student> JsonDeserialization()
+        private async Task<List<Student>> JsonDeserialization()
         {
             List<Student> students;
             using (var r = new StreamReader(Path))
@@ -108,13 +138,13 @@ namespace ClassLibrary
         #endregion
 
         #region ViewStudentDetails
-        public void LoadData(string id)
+        public async void LoadData(string id)
         {
-            var students = JsonDeserialization();
-            var student = students.FirstOrDefault(x => x.StudentId == id);
+            var data = await IsValidStudent(id);
+            var student = data.Item2;
             if (student == null)
             {
-                Console.WriteLine("Student Id not Found, Application Closed");
+                Console.WriteLine("Student Not Found, Enter Valid Student Id.\nGoing To Main Menu");
             }
             else
             {
@@ -128,9 +158,15 @@ namespace ClassLibrary
                                   $"\nDegree: {student.Degree}");
                 if (student.SemesterAttend != null)
                 {
+                    if (!student.SemesterAttend.Any())
+                    {
+                        Console.WriteLine("Semester: Not Added");
+                    }
                     foreach (var semester in student.SemesterAttend)
                     {
-                        Console.WriteLine($"\nSemester: {semester.SemCodeResult(semester.SemesterCode)} {semester.Year}"); Console.WriteLine($"Courses:");
+                        Console.WriteLine(
+                            $"\nSemester: {semester.SemCodeResult(semester.SemesterCode)} {semester.Year}");
+                        Console.WriteLine($"Courses:");
                         foreach (var semesterCourse in semester.Courses)
                         {
                             Console.WriteLine($"{semesterCourse.CourseId}" +
@@ -139,8 +175,6 @@ namespace ClassLibrary
                                               $" - {semesterCourse.NumberOfCredits}");
                         }
                     }
-
-
                     Console.WriteLine("\n");
                 }
 
@@ -161,7 +195,7 @@ namespace ClassLibrary
 
             }
         }
-        private static void AddNewSemester(string id)
+        internal static void AddNewSemester(string id)
         {
             var config = ConfigureLibraryClass.Configure();
             using (var scope = config.BeginLifetimeScope())
@@ -176,8 +210,8 @@ namespace ClassLibrary
         #region DeleteStudent
         public void DeleteStudent(string id)
         {
-            var students = JsonDeserialization().ToList();
-            var student = students.FirstOrDefault(x => x.StudentId == id);
+            var student = IsValidStudent(id).Result.Item2;
+            var students = IsValidStudent(id).Result.Item1;
             if (student != null)
             {
                 var otherStudents = students.FindAll(x => x.StudentId != id);
@@ -186,39 +220,30 @@ namespace ClassLibrary
             }
             else
             {
-                Console.WriteLine("Student Id Not Found, Check Id.");
+                Console.WriteLine("Student Not Found, Enter Valid Student Id.\nGoing To Main Menu");
             }
         }
         #endregion
 
-        //#region ListOfStudents
+        #region ListOfStudents
 
+        public async void LoadAllData()
+        {
+            var students = await IsValidStudent();
+            if (students.Count()!=0)
+            {
+                foreach (var student in students)
+                {
+                    Console.WriteLine($"\nName: {student.FirstName}\tStudent ID: {student.StudentId}");
+                }
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("*********No Student Added*********\n\n");
+            }
+        }
 
-        //public void LoadAllData()
-        //{
-        //    var students = JsonDeserialization();
-        //    if (students != null)
-        //    {
-        //        foreach (var student in students)
-        //        {
-        //            Console.WriteLine($"\nName: {student.FirstName}" +
-        //                              $"\tStudent ID: {student.StudentId}");
-
-        //            if (student.SemesterAttend.Courses == null || (student.SemesterAttend.Courses != null && student.SemesterAttend.Courses.Count == 0)) continue;
-        //            Console.WriteLine("Courses: ");
-        //            foreach (var course in student.SemesterAttend.Courses)
-        //            {
-        //                Console.WriteLine($"{course.CourseId} - {course.CourseName} - {course.InstructorName} - {course.NumberOfCredits}");
-        //            }
-        //        }
-        //        Console.WriteLine("\n");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("No Student Added");
-        //    }
-        //}
-
-        //#endregion
+        #endregion
     }
 }

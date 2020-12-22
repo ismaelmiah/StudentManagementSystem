@@ -8,7 +8,7 @@ namespace ClassLibrary
         void SaveStudent(List<Student> data);
         void SaveSemester(string id, List<Semester> data);
         void LoadData(string id);
-        //void DeleteStudent(string id);
-        //void LoadAllData();
+        void DeleteStudent(string id);
+        void LoadAllData();
     }
 }

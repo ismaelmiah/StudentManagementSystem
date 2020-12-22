@@ -15,7 +15,7 @@ namespace Student_Management_System
             while (true)
             {
                 Console.WriteLine("\n\n\tStudent Management System\n\n\tList Of Students\n-----");
-                //ListOfStudents();
+                ListOfStudents();
                 Console.WriteLine("1 Add New Student");
                 Console.WriteLine("2 View Student Details");
                 Console.WriteLine("3 Delete Student");
@@ -33,10 +33,10 @@ namespace Student_Management_System
             }
         }
 
-        //private void ListOfStudents()
-        //{
-        //    _studentServices.ListOfStudent();
-        //}
+        private void ListOfStudents()
+        {
+            _studentServices.ListOfStudent();
+        }
         private void MainMenu(int main)
         {
             switch (main)
@@ -48,7 +48,7 @@ namespace Student_Management_System
                     ViewStudentDetails();
                     break;
                 case 3:
-                    //DeleteStudent();
+                    DeleteStudent();
                     break;
                 default:
                     Console.WriteLine("Wrong Input, Application Closed\n");
@@ -56,10 +56,10 @@ namespace Student_Management_System
                     break;
             }
         }
-        //private void DeleteStudent()
-        //{
-        //    _studentServices.DeleteStudent();
-        ////}
+        private void DeleteStudent()
+        {
+            _studentServices.DeleteStudent();
+        }
         private void ViewStudentDetails()
         {
             _studentServices.ViewStudentDetails();
