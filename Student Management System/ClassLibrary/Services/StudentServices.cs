@@ -15,10 +15,13 @@ namespace ClassLibrary.Services
             _dataAccess = dataAccess;
         }
 
-        private (string fName, string mName, string lName) GetNameTuple()
+        private static (string fName, string mName, string lName) GetNameTuple()
         {
+            Console.Write("First Name: ");
             var f = Console.ReadLine();
+            Console.Write("Middle Name: ");
             var m = Console.ReadLine();
+            Console.Write("Last Name: ");
             var l = Console.ReadLine();
             return (f, m, l);
         }
@@ -26,12 +29,10 @@ namespace ClassLibrary.Services
         {
             var student = new Student();
             Console.WriteLine("\tTo Add a New Student, Enter the following Information\n");
-            Console.Write("First Name: ");
-            student.FirstName = GetNameTuple().fName;
-            Console.Write("Middle Name: ");
-            student.MiddleName = GetNameTuple().mName;
-            Console.Write("Last Name: ");
-            student.LastName = GetNameTuple().lName;
+            var (fName, mName, lName) = GetNameTuple();
+            student.FirstName = fName;
+            student.MiddleName = mName;
+            student.LastName = lName;
             var isOk = true;
             while (isOk)
             {

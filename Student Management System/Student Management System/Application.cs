@@ -3,12 +3,16 @@ using ClassLibrary.Services;
 
 namespace Student_Management_System
 {
+    public delegate void DelEventHandler();
     public class Application : IApplication
     {
+        public event DelEventHandler add;
         private readonly IStudentServices _studentServices;
         public Application(IStudentServices studentServices)
         {
             _studentServices = studentServices;
+            add += new DelEventHandler(Run);
+            add.Invoke();
         }
         public void Run()
         {

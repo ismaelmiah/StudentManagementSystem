@@ -165,7 +165,7 @@ namespace ClassLibrary
                     foreach (var semester in student.SemesterAttend)
                     {
                         Console.WriteLine(
-                            $"\nSemester: {semester.SemCodeResult(semester.SemesterCode)} {semester.Year}");
+                            $"\nSemester: {"".SemCodeResult(semester.SemesterCode)} {semester.Year}");
                         Console.WriteLine($"Courses:");
                         foreach (var semesterCourse in semester.Courses)
                         {

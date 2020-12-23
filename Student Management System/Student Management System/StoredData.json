@@ -1,12 +1,22 @@
 [
   {
-    "FirstName": "Rahima",
-    "MiddleName": "Akter",
-    "LastName": "Runa",
-    "StudentId": "171-335-230",
+    "FirstName": "Rasel",
+    "MiddleName": "",
+    "LastName": "Miah",
+    "StudentId": "171-335-201",
     "JoiningBatch": "Fall 2020",
     "Department": 0,
-    "Degree": 1,
+    "Degree": 6,
+    "SemesterAttend": []
+  },
+  {
+    "FirstName": "Rafiq",
+    "MiddleName": "",
+    "LastName": "Ahamed",
+    "StudentId": "171-350-219",
+    "JoiningBatch": "Fall 2020",
+    "Department": 1,
+    "Degree": 6,
     "SemesterAttend": []
   },
   {
@@ -69,6 +79,29 @@
           }
         ]
       },
+      {
+        "SemesterCode": "SPR",
+        "Year": "2021",
+        "Courses": [
+          {
+            "CourseId": "CSC 301",
+            "CourseName": "System Analysis & Design",
+            "InstructorName": "Robel Khan",
+            "NumberOfCredits": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "FirstName": "Rahima",
+    "MiddleName": "Akter",
+    "LastName": "Runa",
+    "StudentId": "171-335-230",
+    "JoiningBatch": "Fall 2020",
+    "Department": 0,
+    "Degree": 1,
+    "SemesterAttend": [
       {
         "SemesterCode": "SPR",
         "Year": "2021",

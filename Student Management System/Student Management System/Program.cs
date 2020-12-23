@@ -8,8 +8,7 @@ namespace Student_Management_System
         {
             var config = ConfigureClass.Configure();
             using var scope = config.BeginLifetimeScope();
-            var app = scope.Resolve<IApplication>();
-            app.Run();
+            scope.Resolve<IApplication>();
         }
     }
 }

@@ -9,7 +9,11 @@ namespace ClassLibrary.Entities
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string StudentId { get; set; }
-        public string JoiningBatch { get; set; } = GenerateBatch();
+
+        public string JoiningBatch
+        {
+            get => GenerateBatch();
+        }
         public Department Department { get; set; }
         public Degree Degree { get; set; }
         public List<Semester> SemesterAttend { get; set; }
