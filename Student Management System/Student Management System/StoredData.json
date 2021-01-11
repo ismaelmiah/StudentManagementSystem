@@ -4,7 +4,7 @@
     "MiddleName": "",
     "LastName": "Miah",
     "StudentId": "171-335-201",
-    "JoiningBatch": "Fall 2020",
+    "JoiningBatch": "Spring 2021",
     "Department": 0,
     "Degree": 6,
     "SemesterAttend": []
@@ -14,40 +14,17 @@
     "MiddleName": "",
     "LastName": "Noyon",
     "StudentId": "171-335-206",
-    "JoiningBatch": "Fall 2020",
+    "JoiningBatch": "Spring 2021",
     "Department": 0,
     "Degree": 1,
     "SemesterAttend": []
-  },
-  {
-    "FirstName": "Ismail",
-    "MiddleName": "",
-    "LastName": "Miah",
-    "StudentId": "171-335-196",
-    "JoiningBatch": "Fall 2020",
-    "Department": 0,
-    "Degree": 1,
-    "SemesterAttend": [
-      {
-        "SemesterCode": "SUM",
-        "Year": "2021",
-        "Courses": [
-          {
-            "CourseId": "CSC 211",
-            "CourseName": "Theory Of Computing",
-            "InstructorName": "Marzia Hossain",
-            "NumberOfCredits": 4
-          }
-        ]
-      }
-    ]
   },
   {
     "FirstName": "Rezuwan",
     "MiddleName": "",
     "LastName": "Islam",
     "StudentId": "171-350-235",
-    "JoiningBatch": "Fall 2020",
+    "JoiningBatch": "Spring 2021",
     "Department": 1,
     "Degree": 4,
     "SemesterAttend": [
@@ -88,7 +65,7 @@
     "MiddleName": "Akter",
     "LastName": "Runa",
     "StudentId": "171-335-230",
-    "JoiningBatch": "Fall 2020",
+    "JoiningBatch": "Spring 2021",
     "Department": 0,
     "Degree": 1,
     "SemesterAttend": [
@@ -111,7 +88,7 @@
     "MiddleName": "",
     "LastName": "Mahmude",
     "StudentId": "171-335-190",
-    "JoiningBatch": "Fall 2020",
+    "JoiningBatch": "Spring 2021",
     "Department": 2,
     "Degree": 3,
     "SemesterAttend": [
