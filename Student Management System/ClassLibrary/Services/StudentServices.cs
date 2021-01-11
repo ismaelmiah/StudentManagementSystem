@@ -44,6 +44,7 @@ namespace ClassLibrary.Services
                 {
                     case false:
                         Console.WriteLine("Student ID is not in format, Please enter Correctly");
+                        isOk = true;
                         break;
                     default:
                         isOk = false;

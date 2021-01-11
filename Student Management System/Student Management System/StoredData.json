@@ -10,16 +10,6 @@
     "SemesterAttend": []
   },
   {
-    "FirstName": "Rafiq",
-    "MiddleName": "",
-    "LastName": "Ahamed",
-    "StudentId": "171-350-219",
-    "JoiningBatch": "Fall 2020",
-    "Department": 1,
-    "Degree": 6,
-    "SemesterAttend": []
-  },
-  {
     "FirstName": "Ashadujjaman",
     "MiddleName": "",
     "LastName": "Noyon",
@@ -110,6 +100,29 @@
             "CourseId": "CSC 301",
             "CourseName": "System Analysis & Design",
             "InstructorName": "Robel Khan",
+            "NumberOfCredits": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "FirstName": "Shaheen",
+    "MiddleName": "",
+    "LastName": "Mahmude",
+    "StudentId": "171-335-190",
+    "JoiningBatch": "Fall 2020",
+    "Department": 2,
+    "Degree": 3,
+    "SemesterAttend": [
+      {
+        "SemesterCode": "SUM",
+        "Year": "2021",
+        "Courses": [
+          {
+            "CourseId": "CSC 302",
+            "CourseName": "Computer Architecture",
+            "InstructorName": "Nafiz Ahamed",
             "NumberOfCredits": 4
           }
         ]
