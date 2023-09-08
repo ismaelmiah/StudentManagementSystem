@@ -42,6 +42,10 @@ This application was made as simple assignment task on C# language understanding
    1. Add New Semester mode
    2. Go to menu
 4. Delete Student will delete the student and corresponding dependencies. 
-5. In the Add New Semester mode, the user can add a new semester to the student and add courses to him/her. 
+5. In the Add New Semester mode, the user can add a new semester to the student and add courses to him/her.
+
+![Main menu](https://github.com/ismaelmiah/StudentManagementSystem/blob/main/Images/Main%20Menu.png?raw=true)
+![Add Semester](https://github.com/ismaelmiah/StudentManagementSystem/blob/main/Images/Add%20Semester.png?raw=true)
+![Add Course](https://github.com/ismaelmiah/StudentManagementSystem/blob/main/Images/Add%20Course.png?raw=true)
 
 So maybe we first show courses he/she hasn’t taken yet, and then select from those courses. 
